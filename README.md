@@ -1,7 +1,7 @@
 <img width="1281" height="585" alt="image" src="https://github.com/user-attachments/assets/d07332fc-3930-44eb-8c4a-625af0d202fe" /><img width="1281" height="585" alt="image" src="https://github.com/user-attachments/assets/bba27c4b-1c12-49df-bcfa-c1aaf9fb634a" /># Monitoursfour - Hack The Box Writeup
 
 ## Machine Info
-- **Name:** Monitoursfour
+- **Name:** Monitorsfour
 - **IP:** 10.10.11.98
 - **OS:** Windows Server (with Docker/WSL2)
 - **Difficulty:** Medium
