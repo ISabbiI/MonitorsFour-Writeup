@@ -170,7 +170,9 @@ Located in the container filesystem:
 ```bash
 cat /home/marcus/user.txt
 ```
-<img width="762" height="282" alt="image" src="https://github.com/user-attachments/assets/5ac48905-c336-4101-9c64-952e304d5e67" />
+<img width="717" height="282" alt="Capture d’écran 2026-02-02 094353" src="https://github.com/user-attachments/assets/629fe9b4-33f7-4d91-9cbe-9939384873a1" />
+
+
 
 
 ### Docker Escape (CVE-2025-9074)
