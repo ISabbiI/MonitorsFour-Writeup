@@ -7,10 +7,10 @@
 ## Machine Info
 - **Name:** Monitorsfour
 - **IP:** 10.10.11.98
-- **OS:** Windows Server (with Docker/WSL2)
+- **OS:** Windows Server
 - **Date:** 2026-01-14
 
-For the context, this hack the box writeup represents how externel attacker could achieve, starting from simple web exposure, and demonstrating how multiple issues combine into full isntrascture compromise
+For the context, this hack the box writeup illustrates how an external attacker can chain multiple weaknesses to achieve infrastrcuture compromise
 
 
 ## 1. Reconnaissance
@@ -119,7 +119,7 @@ Retrieved JSON with 4 users and MD5 password hashes:
 | dthompson | 8d4a7e7fd08555133e056d9aacb1e519 | David Thompson | user |
 
 ### Hash Cracking
-Cracked the admin hash using CrackStation:
+The MD5 hash for the admin account was cracked by using public tools on the internet 
 - **Hash:** `56b32eb43e6f15395f6c46c1c9e1cd36`
 - **Password:** `wonderful1`
 
@@ -134,7 +134,7 @@ Authenticated RCE via graph template newline injection.
 Cacti fails to sanitize newline characters in graph parameters, allowing command injection when `rrdtool` is called.
 
 **Exploitation:**
-Used public exploit from GitHub:
+A public POC exploit was used to leverage the RCE vulnerability
 ```bash
 cd /tmp
 git clone https://github.com/TheCyberGeek/CVE-2025-24367-Cacti-PoC
@@ -177,7 +177,7 @@ cat /home/marcus/user.txt
 
 
 
-### Docker Escape (CVE-2025-9074)
+### Docker escape
 
 The Docker socket was not accessible at `/var/run/docker.sock`, but the Docker Desktop API was exposed on the internal network.
 
@@ -272,7 +272,7 @@ How i would have prevented this attack chain in a product environment :
 - Disable directory listing and deny acces to dotfiles (.env, .git) in web server config
 - Use strict comparision instead of loose in the authentication logic
 - Upgrade Cacti to the latest version
-- Never expose 2375, Use TLS authetication (port 2376) or restcit acces to localhost/VPN
+- Never expose 2375, Use TLS authetication (port 2376) or restrcrit acces 
 - Never use MD5 for password storage
 
 ---
