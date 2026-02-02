@@ -8,8 +8,10 @@
 - **Name:** Monitorsfour
 - **IP:** 10.10.11.98
 - **OS:** Windows Server (with Docker/WSL2)
-- **Difficulty:** Medium
 - **Date:** 2026-01-14
+
+For the context, this hack the box writeup represents how externel attacker could achieve, starting from simple web exposure, and demonstrating how multiple issues combine into full isntrascture compromise
+
 
 ## 1. Reconnaissance
 
@@ -271,6 +273,7 @@ How i would have prevented this attack chain in a product environment :
 - Use strict comparision instead of loose in the authentication logic
 - Upgrade Cacti to the latest version
 - Never expose 2375, Use TLS authetication (port 2376) or restcit acces to localhost/VPN
+- Never use MD5 for password storage
 
 ---
 
