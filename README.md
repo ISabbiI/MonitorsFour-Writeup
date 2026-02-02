@@ -264,6 +264,14 @@ Located at: `C:\Users\Administrator\Desktop\root.txt` on the Windows host, acces
 
 <img width="1200" height="837" alt="image" src="https://github.com/user-attachments/assets/e406e6be-0306-4fcd-8130-9df780a58267" />
 
+## 6. Remediation
+How i would have prevented this attack chain in a product environment : 
+
+- Disable directory listing and deny acces to dotfiles (.env, .git) in web server config
+- Use strict comparision instead of loose in the authentication logic
+- Upgrade Cacti to the latest version
+- Never expose 2375, Use TLS authetication (port 2376) or restcit acces to localhost/VPN
+
 ---
 
 
